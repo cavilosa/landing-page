@@ -48,7 +48,8 @@ function listItems () {
 }
 
 // Add class 'active' to section when near top of viewport
-
+function classActive () {
+}
 
 // Scroll to anchor ID using scrollTO event
 
