@@ -31,15 +31,11 @@ const sections = document.querySelectorAll("section");
 */
 
 
-
 /**
  * End Helper Functions
  * Begin Main Functions
  *
 */
-function scrollToElement (element) {
-    element.scrollIntoView();
-}
 
 
 // build the nav
@@ -51,18 +47,33 @@ function listItems () {
     return navList;
 }
 
-listItems();
-
 // Add class 'active' to section when near top of viewport
 
 
 // Scroll to anchor ID using scrollTO event
 
+function buildMenu () {
+    listItems();
+    const menuLinks = document.querySelectorAll(".menu__link");
+    for (const menuLink of menuLinks) {
+        const text = menuLink.textContent.split(" ").join("").toLowerCase();
+        //const text = menuLink.textContent
+        console.log(text);
+        const place = document.getElementById(`${text}`);
+        console.log(place);
+        menuLink.addEventListener("click", function (e) {
+            place.scrollIntoView();
+        });
+    }
+}
+
+buildMenu();
 /**
  * End Main Functions
  * Begin Events
  *
 */
+
 
 // Build menu
 
