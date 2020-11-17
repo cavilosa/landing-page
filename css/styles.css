@@ -67,7 +67,8 @@ section {
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
-    text-align: right;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .navbar__menu li {
@@ -83,16 +84,16 @@ section {
 }
 
 .navbar__menu .menu__link:hover {
-    background: #333;
-    color: #fff;
+    background: #cccc00;
+    color: #333300;
     transition: ease 0.3s all;
 }
 
 /* Header Styles */
 .page__header {
-    background: #fff;
+    background: #ffff00;
     position: fixed;
-    top: 0;
+    top: 20px;
     width: 100%;
     z-index: 5;
 }
