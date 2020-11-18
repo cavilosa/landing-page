@@ -1,41 +1,7 @@
-/*
- *
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- *
- * Dependencies: None
- *
- * JS Version: ES2015/ES6
- *
- * JS Standard: ESlint
- *
-*/
-
-/*
- * Define Global Variables
- *
-*/
-
-// Variable to append li items
+// Variable to append li items to
 const navList = document.querySelector("ul");
-
+// Variable for sections selector
 const sections = document.querySelectorAll("section");
-
-
-/**
- * End Global Variables
- * Start Helper Functions
- *
-*/
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
-*/
 
 
 // build the nav
@@ -50,56 +16,38 @@ function navbarItems () {
 // Add class 'active' to section when near top of viewport
 function classActive () {
     for (const section of sections) {
-        section.addEventListener("click", function () {
+        window.addEventListener("scroll", function () {
             const block = section.getBoundingClientRect();
-            //console.log(block.top, block.bottom);
-            const viewportHeight = window.innerHeight;
-            //console.log(viewportHeight);
-            //section.classList.add("your-active-class");
-            //console.log(section.classList);
             if (block.top <= 200 && block.bottom >= 200) {
                 section.classList.add("your-active-class");
-                console.log(section, section.classList);
             } else {
                 section.classList.remove("your-active-class");
-                console.log(section, section.classList);
             }
         })
     }
 }
 
-
-
-
 // Scroll to anchor ID using scrollTO event
-function buildMenu () {
-    navbarItems();
-    document.addEventListener("scroll", function (){
-        classActive();
-    })
+function scrollToSection() {
     const menuLinks = document.querySelectorAll(".menu__link");
     for (const menuLink of menuLinks) {
         const text = menuLink.textContent.split(" ").join("").toLowerCase();
-        //const text = menuLink.textContent
-        //console.log(text);
         const place = document.getElementById(`${text}`);
-        //console.log(place);
+        // Listener form nav link to the section with same id
         menuLink.addEventListener("click", function (e) {
             place.scrollIntoView();
         });
     }
 }
 
+
+function buildMenu () {
+    // Create list of items in navbar
+    navbarItems();
+    // Listener for scroll event to make the section active
+    classActive();
+    // Scroll to specified section by clicking on the nav link
+    scrollToSection();
+}
+
 buildMenu();
-/**
- * End Main Functions
- * Begin Events
- *
-*/
-
-
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
