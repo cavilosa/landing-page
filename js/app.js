@@ -39,7 +39,7 @@ const sections = document.querySelectorAll("section");
 
 
 // build the nav
-function listItems () {
+function navbarItems () {
     for (const section of sections) {
         const li = section.getAttribute("data-nav");
         navList.innerHTML += `<li class="menu__link">${li}</li>`;
@@ -49,19 +49,41 @@ function listItems () {
 
 // Add class 'active' to section when near top of viewport
 function classActive () {
+    for (const section of sections) {
+        section.addEventListener("click", function () {
+            const block = section.getBoundingClientRect();
+            //console.log(block.top, block.bottom);
+            const viewportHeight = window.innerHeight;
+            //console.log(viewportHeight);
+            //section.classList.add("your-active-class");
+            //console.log(section.classList);
+            if (block.top <= 200 && block.bottom >= 200) {
+                section.classList.add("your-active-class");
+                console.log(section, section.classList);
+            } else {
+                section.classList.remove("your-active-class");
+                console.log(section, section.classList);
+            }
+        })
+    }
 }
 
-// Scroll to anchor ID using scrollTO event
 
+
+
+// Scroll to anchor ID using scrollTO event
 function buildMenu () {
-    listItems();
+    navbarItems();
+    document.addEventListener("scroll", function (){
+        classActive();
+    })
     const menuLinks = document.querySelectorAll(".menu__link");
     for (const menuLink of menuLinks) {
         const text = menuLink.textContent.split(" ").join("").toLowerCase();
         //const text = menuLink.textContent
-        console.log(text);
+        //console.log(text);
         const place = document.getElementById(`${text}`);
-        console.log(place);
+        //console.log(place);
         menuLink.addEventListener("click", function (e) {
             place.scrollIntoView();
         });
