@@ -50,7 +50,7 @@ function navbarItems () {
 // Add class 'active' to section when near top of viewport
 function classActive () {
     for (const section of sections) {
-        section.addEventListener("click", function () {
+        window.addEventListener("scroll", function () {
             const block = section.getBoundingClientRect();
             //console.log(block.top, block.bottom);
             //const viewportHeight = window.innerHeight;
