@@ -116,7 +116,6 @@ section {
     color: #fff;
 }
 
-
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */
 .landing__container {
@@ -227,9 +226,10 @@ section.active .landing__container::after {
     background-color: #ccff66;
     color: #fff;
     cursor: pointer;
-    padding: 15px;
+    padding: 10px;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 #button:hover {

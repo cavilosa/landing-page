@@ -68,8 +68,8 @@ function scrollToTop() {
 
 function scrollTop() {
     const pageFold = window.innerHeight;
-    console.log(pageFold);
-    console.log(window.scrollY);
+    //console.log(pageFold);
+    //console.log(window.scrollY);
     if (window.scrollY > pageFold) {
         const button = document.querySelector("#button");
         button.style.display = "inline";
@@ -81,6 +81,20 @@ function scrollTop() {
     }
 }
 
+function collapsible() {
+    var colls = document.querySelectorAll(".collapsible");
+    for (const col of colls) {
+        col.addEventListener("click", function() {
+            col.classList.toggle("collapsed");
+            const content = col.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+}
 
 // Main function to create menue items and make them % sections active or not
 function buildMenu() {
@@ -92,6 +106,8 @@ function buildMenu() {
     scrollToSection();
 
     scrollTop();
+
+    collapsible();
 
     window.onscroll = function() {
         navList.style.display = "flex";
