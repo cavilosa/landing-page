@@ -21,7 +21,6 @@ function navItem (section) {
     const text = section.getAttribute("data-nav");
     const links = document.querySelectorAll(".menu__link");
     for (const link of links) {
-        console.log(link.textContent);
         if (link.textContent === text) {
             link.classList.add("active__link");
         } else {

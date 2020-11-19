@@ -217,6 +217,25 @@ section.active .landing__container::after {
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
 
+#button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 50vw;
+    z-index: 10;
+    border: outset;
+    background-color: #ccff66;
+    color: #fff;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+#button:hover {
+    background-color: #cccc00;
+}
+
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {
 	from {
