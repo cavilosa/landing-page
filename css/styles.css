@@ -57,9 +57,10 @@ main {
 
 section {
     position: relative;
-    min-height: 80vh;
+    height: auto;
+    margin: 20px;
+    border-radius: 20px;
 }
-
 
 /* ---- Module Rules ---- */
 
@@ -98,7 +99,7 @@ section {
 
 /* Header Styles */
 .page__header {
-    background: #ffff00;
+    background: #0099cc;
     position: fixed;
     top: 20px;
     width: 100%;
@@ -122,6 +123,22 @@ section {
 .landing__container {
     padding: 1em;
     text-align: left;
+    display: none;
+}
+
+.collapsible {
+    background-color: inherit;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+}
+
+.opened, .collapsible:hover {
+    background-color: #33cccc;
 }
 
 @media only screen and (min-width: 35em){
@@ -224,7 +241,7 @@ section.active .landing__container::after {
     right: 50vw;
     z-index: 10;
     border: outset;
-    background-color: #ccff66;
+    /*background-color: #ccff66;*/
     color: #fff;
     cursor: pointer;
     padding: 15px;

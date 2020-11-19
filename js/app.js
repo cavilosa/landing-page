@@ -68,8 +68,6 @@ function scrollToTop() {
 
 function scrollTop() {
     const pageFold = window.innerHeight;
-    console.log(pageFold);
-    console.log(window.scrollY);
     if (window.scrollY > pageFold) {
         const button = document.querySelector("#button");
         button.style.display = "inline";
@@ -79,6 +77,19 @@ function scrollTop() {
     } else {
         button.style.display = "none";
     }
+}
+
+const colls = document.querySelectorAll(".collapsible");
+for (const coll of colls) {
+    coll.addEventListener("click", function() {
+        coll.classList.toggle("opened");
+        const content = coll.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
 }
 
 
