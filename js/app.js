@@ -60,29 +60,56 @@ function scrollToSection() {
 function hideMenu() {
     navList.style.display = "none";
 }
-// Scroll and lick will bring the menu back
-window.onscroll = function() {
-    navList.style.display = "flex";
+
+
+function scrollToTop() {
+    window.scrollTo(0, 0);
 }
-window.onclick = function() {
-    navList.style.display = "flex";
+
+function scrollTop() {
+    const pageFold = window.innerHeight;
+    console.log(pageFold);
+    console.log(window.scrollY);
+    if (window.scrollY > pageFold) {
+        const button = document.querySelector("#button");
+        button.style.display = "inline";
+        button.addEventListener("click", function() {
+            scrollToTop();
+        })
+    } else {
+        button.style.display = "none";
+    }
 }
-// 4 sec after no scroll or click activity the navbar hides
-window.addEventListener("scroll", function() {
-    setTimeout("hideMenu()", 4000);
-});
-window.addEventListener("click", function() {
-    setTimeout("hideMenu()", 4000);
-});
+
 
 // Main function to create menue items and make them % sections active or not
-function buildMenu () {
+function buildMenu() {
     // Create list of items in navbar
     navbarItems();
     // Listener for scroll event to make the section active
     classActive();
     // Scroll to specified section by clicking on the nav link
     scrollToSection();
+
+    scrollTop();
+
+    window.onscroll = function() {
+        navList.style.display = "flex";
+    };
+    window.onclick = function() {
+        navList.style.display = "flex";
+    };
+    // 10 sec after no scroll or click activity the navbar hides
+    window.addEventListener("scroll", function() {
+        setTimeout("hideMenu()", 10000);
+    });
+    window.addEventListener("click", function() {
+        setTimeout("hideMenu()", 10000);
+    });
+
+    window.addEventListener("scroll", function() {
+        scrollTop();
+    })
 }
 
 buildMenu();
