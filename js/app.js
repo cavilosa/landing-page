@@ -49,10 +49,15 @@ function scrollToSection() {
     const links = document.querySelectorAll(".menu__link");
     for (const link of links) {
         const text = link.textContent.split(" ").join("").toLowerCase();
+        //console.log(text);
         const place = document.getElementById(`${text}`);
+        const context = place.firstElementChild.nextElementSibling;
+        console.log(context);
         // Listener form nav link to the section with same id
         link.addEventListener("click", function (e) {
             place.scrollIntoView();
+            console.log(place.firstElementChild);
+            context.classList.toggle("opened");
         });
     }
 }
