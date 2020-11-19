@@ -14,14 +14,30 @@ function navbarItems () {
 }
 
 // Add class 'active' to section when near top of viewport
+
+function navItem (section) {
+    const text = section.getAttribute("data-nav");
+    //console.log(text);
+    const links = document.querySelectorAll(".menu__link");
+    //console.log(links);
+    for (const link of links) {
+        if (link.textContent === text) {
+            link.classList.add("active");
+            console.log(link);
+        }
+    }
+}
+
+
 function classActive () {
     for (const section of sections) {
         window.addEventListener("scroll", function () {
             const block = section.getBoundingClientRect();
             if (block.top <= 200 && block.bottom >= 200) {
-                section.classList.add("your-active-class");
+                section.classList.add("active");
+                navItem(section);
             } else {
-                section.classList.remove("your-active-class");
+                section.classList.remove("active");
             }
         })
     }
