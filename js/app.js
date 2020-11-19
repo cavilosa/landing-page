@@ -20,10 +20,14 @@ function navItem (section) {
     //console.log(text);
     const links = document.querySelectorAll(".menu__link");
     //console.log(links);
+    //const link = links.querySelector
     for (const link of links) {
+        console.log(link.textContent);
         if (link.textContent === text) {
-            link.classList.add("active");
-            console.log(link);
+            link.classList.add("active__link");
+            //console.log(link.classList);
+        } else {
+            link.classList.remove("active__link");
         }
     }
 }

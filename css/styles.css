@@ -89,10 +89,11 @@ section {
     transition: ease 0.3s all;
 }
 
-li .menu__link .active {
-    background: red;
-    color: blue;
+.active__link {
+    background: #cccc00;
+    color: #fff;
     transition: ease 0.3s all;
+    border-radius: 5px;
 }
 
 /* Header Styles */
