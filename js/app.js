@@ -109,7 +109,7 @@ function buildMenu() {
 
     window.addEventListener("scroll", function() {
         scrollTop();
-    })
+    });
 }
 
 buildMenu();
