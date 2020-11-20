@@ -44,6 +44,16 @@ function classActive () {
     }
 }
 
+function openTextFromLink(context) {
+    if (context.style.display="none") {
+        context.style.display="block";
+    } else {
+        if (context.style.display="block") {
+            context.style.display="none";
+        }
+    }
+}
+
 // Scroll to anchor ID using scrollTO event
 function scrollToSection() {
     const links = document.querySelectorAll(".menu__link");
@@ -51,13 +61,14 @@ function scrollToSection() {
         const text = link.textContent.split(" ").join("").toLowerCase();
         //console.log(text);
         const place = document.getElementById(`${text}`);
+        //console.log(place);
         const context = place.firstElementChild.nextElementSibling;
-        console.log(context);
+        //console.log(context);
         // Listener form nav link to the section with same id
         link.addEventListener("click", function (e) {
+            openTextFromLink(context);
             place.scrollIntoView();
-            console.log(place.firstElementChild);
-            context.classList.toggle("opened");
+            //console.log(place.firstElementChild);
         });
     }
 }
@@ -72,7 +83,7 @@ function scrollToTop() {
 }
 
 function scrollTop() {
-    const pageFold = window.innerHeight;
+    const pageFold = window.innerHeight / 2;
     if (window.scrollY > pageFold) {
         const button = document.querySelector("#button");
         button.style.display = "inline";
