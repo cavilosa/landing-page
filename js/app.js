@@ -46,10 +46,12 @@ function classActive () {
 
 function openTextFromLink(context) {
     if (context.style.display="none") {
+        context.previousElementSibling.classList.toggle("opened");
         context.style.display="block";
     } else {
         if (context.style.display="block") {
             context.style.display="none";
+            context.previousElementSibling.classList.remove("opened");
         }
     }
 }
@@ -67,8 +69,25 @@ function scrollToSection() {
         // Listener form nav link to the section with same id
         link.addEventListener("click", function (e) {
             openTextFromLink(context);
-            place.scrollIntoView();
+            //openCollapsibleFromLink(e);
+            //place.scrollIntoView();
             //console.log(place.firstElementChild);
+        });
+    }
+}
+
+function openCollapsibleFromLink(e) {
+    const colls = document.querySelectorAll(".collapsible");
+    for (const coll of colls) {
+        coll.addEventListener("click", function() {
+            coll.classList.toggle("opened");
+            const content = coll.nextElementSibling;
+            console.log(content);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
         });
     }
 }
@@ -95,17 +114,20 @@ function scrollTop() {
     }
 }
 
-const colls = document.querySelectorAll(".collapsible");
-for (const coll of colls) {
-    coll.addEventListener("click", function() {
-        coll.classList.toggle("opened");
-        const content = coll.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    });
+function openCollapsible() {
+    const colls = document.querySelectorAll(".collapsible");
+    for (const coll of colls) {
+        coll.addEventListener("click", function() {
+            coll.classList.toggle("opened");
+            const content = coll.nextElementSibling;
+            console.log(content);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
 }
 
 
@@ -119,6 +141,8 @@ function buildMenu() {
     scrollToSection();
 
     scrollTop();
+
+    openCollapsible();
 
     window.onscroll = function() {
         navList.style.display = "flex";
