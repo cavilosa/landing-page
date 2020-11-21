@@ -46,14 +46,12 @@ function classActive () {
 
 function openTextFromLink(context) {
     if (context.style.display="none") {
-        context.previousElementSibling.classList.toggle("opened");
         context.style.display="block";
-    } else {
-        if (context.style.display="block") {
-            context.style.display="none";
-            context.previousElementSibling.classList.remove("opened");
-        }
-    }
+        context.previousElementSibling.classList.add("opened");
+    } /*else if (context.style.display="block") {
+        context.previousElementSibling.classList.remove("opened");
+        context.style.display="none";
+    }*/
 }
 
 // Scroll to anchor ID using scrollTO event
