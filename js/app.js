@@ -48,10 +48,7 @@ function openTextFromLink(context) {
     if (context.style.display="none") {
         context.style.display="block";
         context.previousElementSibling.classList.add("opened");
-    } /*else if (context.style.display="block") {
-        context.previousElementSibling.classList.remove("opened");
-        context.style.display="none";
-    }*/
+    }
 }
 
 // Scroll to anchor ID using scrollTO event
@@ -68,12 +65,12 @@ function scrollToSection() {
         link.addEventListener("click", function (e) {
             openTextFromLink(context);
             //openCollapsibleFromLink(e);
-            //place.scrollIntoView();
+            place.scrollIntoView();
             //console.log(place.firstElementChild);
         });
     }
 }
-
+/*
 function openCollapsibleFromLink(e) {
     const colls = document.querySelectorAll(".collapsible");
     for (const coll of colls) {
@@ -88,7 +85,7 @@ function openCollapsibleFromLink(e) {
             }
         });
     }
-}
+}*/
 
 function hideMenu() {
     navList.style.display = "none";

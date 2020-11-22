@@ -72,6 +72,7 @@ section {
     flex-flow: row wrap;
 }
 
+
 .navbar__menu li {
     display: inline-block;
 }
@@ -104,6 +105,7 @@ section {
     top: 20px;
     width: 100%;
     z-index: 5;
+    opacity: 0.7;
 }
 
 /* Footer Styles */
