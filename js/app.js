@@ -39,6 +39,7 @@ function activeLink(text) {
 // Add class active to a section
 function classActive () {
     for (const section of sections) {
+        // Listener for scroll to make the section and link active
         window.addEventListener("scroll", function () {
             const text = section.getAttribute("data-nav");
             const block = section.getBoundingClientRect();
@@ -57,11 +58,11 @@ function classActive () {
 function openOrCloseFromLink(context, text) {
     if (context.previousElementSibling.classList.contains("opened")) {
         context.style.display="none";
-        context.previousElementSibling.classList.remove("opened");
+        context.previousElementSibling.classList.remove("opened"); // button
         activeLink(text)
     } else {
         context.style.display="block";
-        context.previousElementSibling.classList.add("opened"); // button
+        context.previousElementSibling.classList.add("opened");
         activeLink(text);
     }
 }
@@ -73,10 +74,8 @@ function scrollToSection() {
     for (const link of links) {
         const text = link.textContent.split(" ").join("").toLowerCase();
         const place = document.getElementById(`${text}`);
-        //console.log(place);
         const context = place.firstElementChild.nextElementSibling;
-        //console.log(context);
-        //console.log(context.classList);
+
         // Listener form nav link to the section with same id
         link.addEventListener("click", function () {
             openOrCloseFromLink(context, text);
@@ -136,7 +135,7 @@ function openCollapsible() {
 window.addEventListener("scroll", function() {
     if (timer !== null) {
         clearTimeout(timer);
-        navList.style.display="block";
+        navList.style.display="flex";
     }
 
     timer = setTimeout(hideMenu, 10000);
@@ -145,23 +144,17 @@ window.addEventListener("scroll", function() {
 window.addEventListener("click", function() {
     if (timer !== null) {
         clearTimeout(timer);
-        navList.style.display="block";
+        navList.style.display="flex";
     }
 
     timer = setTimeout(hideMenu, 10000);
 });
 
+
+// Listener for scroll to check pageFold
 window.addEventListener("scroll", function() {
     scrollTop();
 });
-
-window.onscroll = function() {
-    navList.style.display = "flex";
-};
-
-window.onclick = function() {
-    navList.style.display = "flex";
-};
 
 
 // Main function to create menue items and make them % sections active or not
