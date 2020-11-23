@@ -47,7 +47,6 @@ function classActive () {
                 activeLink(text);
             } else {
                 section.classList.remove("active");
-                //activeLink(text);
             }
         })
     }
@@ -55,13 +54,15 @@ function classActive () {
 
 
 // to check whether close or open sectino to link click
-function openOrCloseFromLink(context) {
+function openOrCloseFromLink(context, text) {
     if (context.previousElementSibling.classList.contains("opened")) {
         context.style.display="none";
         context.previousElementSibling.classList.remove("opened");
+        activeLink(text)
     } else {
         context.style.display="block";
         context.previousElementSibling.classList.add("opened"); // button
+        activeLink(text);
     }
 }
 
@@ -78,7 +79,7 @@ function scrollToSection() {
         //console.log(context.classList);
         // Listener form nav link to the section with same id
         link.addEventListener("click", function () {
-            openOrCloseFromLink(context);
+            openOrCloseFromLink(context, text);
             place.scrollIntoView();
         });
     }

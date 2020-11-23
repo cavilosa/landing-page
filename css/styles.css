@@ -70,8 +70,8 @@ section {
     margin: 0;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
-
 
 .navbar__menu li {
     display: inline-block;
@@ -282,4 +282,10 @@ section.active .landing__container::after {
 		           translate(-1em)
 		           rotate(-360deg);
 	}
+}
+
+@media(max-width: 560px) {
+    .page__header {
+        font-size: 0.7em;
+    }
 }
