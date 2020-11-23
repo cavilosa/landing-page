@@ -39,15 +39,15 @@ function activeLink(text) {
 // Add class active to a section
 function classActive () {
     for (const section of sections) {
-        const text = section.getAttribute("data-nav");
         window.addEventListener("scroll", function () {
+            const text = section.getAttribute("data-nav");
             const block = section.getBoundingClientRect();
             if (block.top <= 150 && block.bottom >= 150) {
                 section.classList.add("active");
-                console.log(text);
                 activeLink(text);
             } else {
                 section.classList.remove("active");
+                //activeLink(text);
             }
         })
     }
