@@ -57,9 +57,10 @@ main {
 
 section {
     position: relative;
-    min-height: 80vh;
+    height: auto;
+    margin: 20px;
+    border-radius: 20px;
 }
-
 
 /* ---- Module Rules ---- */
 
@@ -70,6 +71,7 @@ section {
     display: flex;
     flex-flow: row wrap;
 }
+
 
 .navbar__menu li {
     display: inline-block;
@@ -84,13 +86,13 @@ section {
 }
 
 .navbar__menu .menu__link:hover {
-    background: #cccc00;
+    background: #009999;
     color: #fff;
     transition: ease 0.3s all;
 }
 
 .active__link {
-    background: #cccc00;
+    background: #009999s;
     color: #fff;
     transition: ease 0.3s all;
     border-radius: 5px;
@@ -98,11 +100,12 @@ section {
 
 /* Header Styles */
 .page__header {
-    background: #ffff00;
+    background: #0099cc;
     position: fixed;
     top: 20px;
     width: 100%;
     z-index: 5;
+    opacity: 0.7;
 }
 
 /* Footer Styles */
@@ -121,6 +124,36 @@ section {
 .landing__container {
     padding: 1em;
     text-align: left;
+    display: none;
+}
+
+.collapsible {
+    background-color: inherit;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 30px;
+    color: inherit;
+    outline: none;
+}
+
+.collapsible:after {
+    content: "\002B";
+    font-size: 25px;
+    color: white;
+    float: right;
+    padding-right: 30px;
+}
+
+.opened, .collapsible:hover {
+    background-color: #009999;
+    border-radius: 30px;
+}
+
+.opened:after {
+    content: "\2212";
 }
 
 @media only screen and (min-width: 35em){
@@ -222,7 +255,8 @@ section.active .landing__container::after {
     bottom: 20px;
     right: 50vw;
     z-index: 10;
-    border: outset;
+    border: none;
+    outline: none;
     background-color: #ccff66;
     color: #fff;
     cursor: pointer;

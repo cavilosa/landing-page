@@ -44,15 +44,29 @@ function classActive () {
     }
 }
 
+function openTextFromLink(context) {
+    if (context.style.display="none") {
+        context.style.display="block";
+        context.previousElementSibling.classList.add("opened");
+    }
+}
+
 // Scroll to anchor ID using scrollTO event
 function scrollToSection() {
     const links = document.querySelectorAll(".menu__link");
     for (const link of links) {
         const text = link.textContent.split(" ").join("").toLowerCase();
+        //console.log(text);
         const place = document.getElementById(`${text}`);
+        //console.log(place);
+        const context = place.firstElementChild.nextElementSibling;
+        //console.log(context);
         // Listener form nav link to the section with same id
         link.addEventListener("click", function (e) {
+            openTextFromLink(context);
+            //openCollapsibleFromLink(e);
             place.scrollIntoView();
+            //console.log(place.firstElementChild);
         });
     }
 }
@@ -67,9 +81,7 @@ function scrollToTop() {
 }
 
 function scrollTop() {
-    const pageFold = window.innerHeight;
-    //console.log(pageFold);
-    //console.log(window.scrollY);
+    const pageFold = window.innerHeight / 2;
     if (window.scrollY > pageFold) {
         const button = document.querySelector("#button");
         button.style.display = "inline";
@@ -81,12 +93,13 @@ function scrollTop() {
     }
 }
 
-function collapsible() {
-    var colls = document.querySelectorAll(".collapsible");
-    for (const col of colls) {
-        col.addEventListener("click", function() {
-            col.classList.toggle("collapsed");
-            const content = col.nextElementSibling;
+function openCollapsible() {
+    const colls = document.querySelectorAll(".collapsible");
+    for (const coll of colls) {
+        coll.addEventListener("click", function() {
+            coll.classList.toggle("opened");
+            const content = coll.nextElementSibling;
+            console.log(content);
             if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
@@ -95,6 +108,39 @@ function collapsible() {
         });
     }
 }
+
+let timer = null;
+// 10 sec after no scroll or click activity the navbar hides
+window.addEventListener("scroll", function() {
+    if (timer !== null) {
+        clearTimeout(timer);
+        navList.style.display="block";
+    }
+
+    timer = setTimeout(hideMenu, 10000);
+});
+
+window.addEventListener("click", function() {
+    if (timer !== null) {
+        clearTimeout(timer);
+        navList.style.display="block";
+    }
+
+    timer = setTimeout(hideMenu, 10000);
+});
+
+window.addEventListener("scroll", function() {
+    scrollTop();
+});
+
+window.onscroll = function() {
+    navList.style.display = "flex";
+};
+
+window.onclick = function() {
+    navList.style.display = "flex";
+};
+
 
 // Main function to create menue items and make them % sections active or not
 function buildMenu() {
@@ -107,25 +153,7 @@ function buildMenu() {
 
     scrollTop();
 
-    collapsible();
-
-    window.onscroll = function() {
-        navList.style.display = "flex";
-    };
-    window.onclick = function() {
-        navList.style.display = "flex";
-    };
-    // 10 sec after no scroll or click activity the navbar hides
-    window.addEventListener("scroll", function() {
-        setTimeout("hideMenu()", 10000);
-    });
-    window.addEventListener("click", function() {
-        setTimeout("hideMenu()", 10000);
-    });
-
-    window.addEventListener("scroll", function() {
-        scrollTop();
-    });
+    openCollapsible();
 }
 
 buildMenu();
