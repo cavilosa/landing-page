@@ -14,7 +14,7 @@ let timer = null;
 
 
 // build the nav
-function navbarItems () {
+function navbarItems() {
     for (const section of sections) {
         const li = section.getAttribute("data-nav");
         navList.innerHTML += `<li class="menu__link">${li}</li>`;
@@ -24,8 +24,7 @@ function navbarItems () {
 
 
 // Add class 'active' to a link
-function navItem (section) {
-    const text = section.getAttribute("data-nav");
+function activeLink(text) {
     const links = document.querySelectorAll(".menu__link");
     for (const link of links) {
         if (link.textContent === text) {
@@ -40,11 +39,13 @@ function navItem (section) {
 // Add class active to a section
 function classActive () {
     for (const section of sections) {
+        const text = section.getAttribute("data-nav");
         window.addEventListener("scroll", function () {
             const block = section.getBoundingClientRect();
-            if (block.top <= 200 && block.bottom >= 200) {
+            if (block.top <= 150 && block.bottom >= 150) {
                 section.classList.add("active");
-                navItem(section);
+                console.log(text);
+                activeLink(text);
             } else {
                 section.classList.remove("active");
             }
@@ -53,27 +54,14 @@ function classActive () {
 }
 
 
-// Link click will open the collapsed text in the corresponding section
-function openTextFromLink(context) { // (landing__container)
-    context.style.display="block";
-    context.previousElementSibling.classList.add("opened"); // button
-}
-
-// Close collapsible by clocking the menu link
-function closeTextFromLink(context) {
-    if (context.style.display="block") {
-        context.style.display="none";
-        context.previousElementSibling.classList.remove("opened");
-    }
-}
-
-
 // to check whether close or open sectino to link click
 function openOrCloseFromLink(context) {
     if (context.previousElementSibling.classList.contains("opened")) {
-        closeTextFromLink(context);
+        context.style.display="none";
+        context.previousElementSibling.classList.remove("opened");
     } else {
-        openTextFromLink(context);
+        context.style.display="block";
+        context.previousElementSibling.classList.add("opened"); // button
     }
 }
 
@@ -84,9 +72,10 @@ function scrollToSection() {
     for (const link of links) {
         const text = link.textContent.split(" ").join("").toLowerCase();
         const place = document.getElementById(`${text}`);
+        //console.log(place);
         const context = place.firstElementChild.nextElementSibling;
-        console.log(context);
-        console.log(context.classList);
+        //console.log(context);
+        //console.log(context.classList);
         // Listener form nav link to the section with same id
         link.addEventListener("click", function () {
             openOrCloseFromLink(context);
@@ -135,6 +124,7 @@ function openCollapsible() {
                 content.style.display = "none";
             } else {
                 content.style.display = "block";
+                content.scrollIntoView();
             }
         });
     }

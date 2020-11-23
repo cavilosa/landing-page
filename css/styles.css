@@ -91,11 +91,10 @@ section {
     transition: ease 0.3s all;
 }
 
-.active__link {
-    background: #009999s;
-    color: #fff;
+.navbar__menu .active__link {
+    background: #009999;
+    color: white;
     transition: ease 0.3s all;
-    border-radius: 5px;
 }
 
 /* Header Styles */
