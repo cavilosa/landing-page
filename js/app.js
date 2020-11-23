@@ -1,10 +1,16 @@
 // Variable to append li items to
 const navList = document.querySelector("ul");
 
+// Links from navbar to sections
 const links = document.querySelectorAll(".menu__link");
+
 // Variable for sections selector
 const sections = document.querySelectorAll("section");
 
+
+// A variable to clear setTimeout so the navbar doen't disappear after
+// repetetive events
+let timer = null;
 
 
 // build the nav
@@ -16,7 +22,8 @@ function navbarItems () {
     return navList;
 }
 
-// Add class 'active' to section when near top of viewport
+
+// Add class 'active' to a link
 function navItem (section) {
     const text = section.getAttribute("data-nav");
     const links = document.querySelectorAll(".menu__link");
@@ -30,6 +37,7 @@ function navItem (section) {
 }
 
 
+// Add class active to a section
 function classActive () {
     for (const section of sections) {
         window.addEventListener("scroll", function () {
@@ -44,10 +52,26 @@ function classActive () {
     }
 }
 
-function openTextFromLink(context) {
-    if (context.style.display="none") {
-        context.style.display="block";
-        context.previousElementSibling.classList.add("opened");
+
+// Link click will open the collapsed text in the corresponding section
+function openTextFromLink(context) { // (landing__container)
+    context.style.display="block";
+    context.previousElementSibling.classList.add("opened"); // button
+}
+
+// Close collapsible by clocking the menu link
+function closeTextFromLink(context) {
+    if (context.style.display="block") {
+        context.style.display="none";
+        context.previousElementSibling.classList.remove("opened");
+    }
+}
+
+function openOrCloseFromLink(context) {
+    if (context.previousElementSibling.classList.contains("opened")) {
+        closeTextFromLink(context);
+    } else {
+        openTextFromLink(context);
     }
 }
 
@@ -56,30 +80,34 @@ function scrollToSection() {
     const links = document.querySelectorAll(".menu__link");
     for (const link of links) {
         const text = link.textContent.split(" ").join("").toLowerCase();
-        //console.log(text);
         const place = document.getElementById(`${text}`);
-        //console.log(place);
         const context = place.firstElementChild.nextElementSibling;
-        //console.log(context);
+        console.log(context);
+        console.log(context.classList);
         // Listener form nav link to the section with same id
-        link.addEventListener("click", function (e) {
-            openTextFromLink(context);
-            //openCollapsibleFromLink(e);
+        link.addEventListener("click", function () {
+            openOrCloseFromLink(context);
+            //openTextFromLink(context);
+            //closeTextFromLink(context);
             place.scrollIntoView();
-            //console.log(place.firstElementChild);
         });
     }
 }
 
+
+// Hides navbar for setTimeout()
 function hideMenu() {
     navList.style.display = "none";
 }
 
 
+// Scrolles to top for the button that apepars after page fold is passed
 function scrollToTop() {
     window.scrollTo(0, 0);
 }
 
+
+// The button appears after page fold is passed to go up the page
 function scrollTop() {
     const pageFold = window.innerHeight / 2;
     if (window.scrollY > pageFold) {
@@ -93,13 +121,15 @@ function scrollTop() {
     }
 }
 
+
+// Openes class collapsible
 function openCollapsible() {
     const colls = document.querySelectorAll(".collapsible");
     for (const coll of colls) {
+        // Listener for an element to toggle class opened
         coll.addEventListener("click", function() {
-            coll.classList.toggle("opened");
-            const content = coll.nextElementSibling;
-            console.log(content);
+            coll.classList.toggle("opened"); // after the button + changes to -
+            const content = coll.nextElementSibling; // .landing__container
             if (content.style.display === "block") {
                 content.style.display = "none";
             } else {
@@ -109,8 +139,9 @@ function openCollapsible() {
     }
 }
 
-let timer = null;
+
 // 10 sec after no scroll or click activity the navbar hides
+
 window.addEventListener("scroll", function() {
     if (timer !== null) {
         clearTimeout(timer);
