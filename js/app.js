@@ -67,6 +67,8 @@ function closeTextFromLink(context) {
     }
 }
 
+
+// to check whether close or open sectino to link click
 function openOrCloseFromLink(context) {
     if (context.previousElementSibling.classList.contains("opened")) {
         closeTextFromLink(context);
@@ -74,6 +76,7 @@ function openOrCloseFromLink(context) {
         openTextFromLink(context);
     }
 }
+
 
 // Scroll to anchor ID using scrollTO event
 function scrollToSection() {
@@ -87,8 +90,6 @@ function scrollToSection() {
         // Listener form nav link to the section with same id
         link.addEventListener("click", function () {
             openOrCloseFromLink(context);
-            //openTextFromLink(context);
-            //closeTextFromLink(context);
             place.scrollIntoView();
         });
     }
@@ -141,7 +142,6 @@ function openCollapsible() {
 
 
 // 10 sec after no scroll or click activity the navbar hides
-
 window.addEventListener("scroll", function() {
     if (timer !== null) {
         clearTimeout(timer);
