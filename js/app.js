@@ -1,8 +1,6 @@
 // Variable to append li items to
 const navList = document.querySelector("ul");
 
-// Links from navbar to sections
-const links = document.querySelectorAll(".menu__link");
 
 // Variable for sections selector
 const sections = document.querySelectorAll("section");
@@ -49,7 +47,7 @@ function classActive () {
             } else {
                 section.classList.remove("active");
             }
-        })
+        });
     }
 }
 
@@ -59,7 +57,7 @@ function openOrCloseFromLink(context, text) {
     if (context.previousElementSibling.classList.contains("opened")) {
         context.style.display="none";
         context.previousElementSibling.classList.remove("opened"); // button
-        activeLink(text)
+        activeLink(text);
     } else {
         context.style.display="block";
         context.previousElementSibling.classList.add("opened");
@@ -105,7 +103,7 @@ function scrollTop() {
         button.style.display = "inline";
         button.addEventListener("click", function() {
             scrollToTop();
-        })
+        });
     } else {
         button.style.display = "none";
     }
@@ -155,6 +153,16 @@ window.addEventListener("click", function() {
 window.addEventListener("scroll", function() {
     scrollTop();
 });
+
+window.addEventListener("load", function() {
+    scrollTop();
+});
+
+
+// The page is at the top after reload
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+};
 
 
 // Main function to create menue items and make them % sections active or not
