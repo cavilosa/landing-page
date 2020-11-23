@@ -70,22 +70,6 @@ function scrollToSection() {
         });
     }
 }
-/*
-function openCollapsibleFromLink(e) {
-    const colls = document.querySelectorAll(".collapsible");
-    for (const coll of colls) {
-        coll.addEventListener("click", function() {
-            coll.classList.toggle("opened");
-            const content = coll.nextElementSibling;
-            console.log(content);
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
-}*/
 
 function hideMenu() {
     navList.style.display = "none";
@@ -125,6 +109,38 @@ function openCollapsible() {
     }
 }
 
+let timer = null;
+// 10 sec after no scroll or click activity the navbar hides
+window.addEventListener("scroll", function() {
+    if (timer !== null) {
+        clearTimeout(timer);
+        navList.style.display="block";
+    }
+
+    timer = setTimeout(hideMenu, 10000);
+});
+
+window.addEventListener("click", function() {
+    if (timer !== null) {
+        clearTimeout(timer);
+        navList.style.display="block";
+    }
+    
+    timer = setTimeout(hideMenu, 10000);
+});
+
+window.addEventListener("scroll", function() {
+    scrollTop();
+});
+
+window.onscroll = function() {
+    navList.style.display = "flex";
+};
+
+window.onclick = function() {
+    navList.style.display = "flex";
+};
+
 
 // Main function to create menue items and make them % sections active or not
 function buildMenu() {
@@ -138,24 +154,6 @@ function buildMenu() {
     scrollTop();
 
     openCollapsible();
-
-    window.onscroll = function() {
-        navList.style.display = "flex";
-    };
-    window.onclick = function() {
-        navList.style.display = "flex";
-    };
-    // 10 sec after no scroll or click activity the navbar hides
-    window.addEventListener("scroll", function() {
-        setTimeout("hideMenu()", 10000);
-    });
-    window.addEventListener("click", function() {
-        setTimeout("hideMenu()", 10000);
-    });
-
-    window.addEventListener("scroll", function() {
-        scrollTop();
-    });
 }
 
 buildMenu();
